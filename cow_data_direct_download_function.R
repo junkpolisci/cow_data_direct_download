@@ -1,6 +1,6 @@
 cow_data_download <- function(file){
   
-  require("data.table")
+  if(!require("data.table")) install.packages("data.table")
   #Each if or else if command downloads one file. 
   
   
