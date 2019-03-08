@@ -46,10 +46,10 @@ cow_data_download <- function(file){
   download.file(dyadic_url, temp1)
   fname = unzip(temp1, list=TRUE)$Name[1]  
   fname
-  unzip(temp1, files=fname, exdir=td, overwrite=TRUE)
-  fpath <- file.path(fname)
-  paste0(td, fname)
-  dyadic_interstate_war <- read.csv("directed_dyadic_war.csv", header = T)
+  unzip(temp1, files=fname, exdir=td, overwrite=TRUE) #This says the filel is corrupt, everything after this was me trying to fix it, which also didn't work. 
+  # fpath <- file.path(fname)
+  # paste0(td, fname)
+  # dyadic_interstate_war <- read.csv("directed_dyadic_war.csv", header = T)
   #   http://www.correlatesofwar.org/data-sets/COW-war/dyadic-inter-state-war-dataset/at_download/file
       #"directed_dyadic_war.csv"
   # }
