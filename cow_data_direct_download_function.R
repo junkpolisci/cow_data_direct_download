@@ -38,9 +38,20 @@ cow_data_download <- function(file){
     interstate_war <- data.table::fread("http://www.correlatesofwar.org/data-sets/COW-war/inter-state-war-data/at_download/file")
   }
   
-  # else if (file == "interstate_war_dyadic") {
+   else if (file == "interstate_war_dyadic") {
   #   This is a sticking point because this link is a zip folder. I need to figure out how to access it and download one of the files.
-  #http://www.correlatesofwar.org/data-sets/COW-war/dyadic-inter-state-war-dataset/at_download/file
+  td <- tempdir()
+  temp1 <- tempfile(tmpdir = td, fileext = ".zip")
+  dyadic_url <- "http://www.correlatesofwar.org/data-sets/COW-war/dyadic-inter-state-war-dataset/at_download/file"
+  download.file(dyadic_url, temp1)
+  fname = unzip(temp1, list=TRUE)$Name[1]  
+  fname
+  unzip(temp1, files=fname, exdir=td, overwrite=TRUE)
+  fpath <- file.path(fname)
+  paste0(td, fname)
+  dyadic_interstate_war <- read.csv("directed_dyadic_war.csv", header = T)
+  #   http://www.correlatesofwar.org/data-sets/COW-war/dyadic-inter-state-war-dataset/at_download/file
+      #"directed_dyadic_war.csv"
   # }
   
   else if (file == "extrastate_war") {
@@ -58,6 +69,7 @@ system2016 <- cow_data_download("system2016")
 nonstate_war <- cow_data_download("nonstate_war")
 intrastate_war <- cow_data_download("intrastate_war")
 interstate_war <- cow_data_download("interstate_war")
+dyadic_interstate_war
 extrastate_war <- cow_data_download("extrastate_war")
 
 war <- cow_data_download("war")
